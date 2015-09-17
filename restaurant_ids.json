@@ -1,0 +1,26 @@
+[
+    {
+        "name": "McDonald's",
+        "id": "513fbc1283aa2dc80c000053"
+    },
+    {
+        "name": "Wendy's",
+        "id": "513fbc1283aa2dc80c00000f"
+    },
+    {
+        "name": "Taco Bell",
+        "id": "513fbc1283aa2dc80c000020"
+    },
+    {
+        "name": "Qdoba",
+        "id": "513fbc1283aa2dc80c00003a"
+    },
+    {
+        "name": "Chipotle",
+        "id": "513fbc1283aa2dc80c000002"
+    },
+    {
+        "name": "Five Guys",
+        "id": "513fbc1283aa2dc80c00003f"
+    }
+]
