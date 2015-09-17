@@ -1,6 +1,11 @@
 # Nutritionix API key
 credentials.json
 
+# Nutritionix data
+# I downloaded this data so I don't have to keep hitting Nutritionix's
+# servers, but they probably don't want me publishing their data.
+restaurant_menu_data.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
