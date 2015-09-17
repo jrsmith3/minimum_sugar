@@ -1,27 +1,8 @@
-
 # coding: utf-8
-
-# In[74]:
 
 import requests
 import json
 import os
-
-# Load credential data from file
-with open("credentials.json", "r") as f:
-    credentials = json.load(f)
-
-# Load restaurant ids from file
-with open ("restaurant_ids.json", "r") as f:
-    restaurant_ids = json.load(f)
-
-
-# In[75]:
-
-restaurant_ids
-
-
-# In[163]:
 
 def fetch_subset_menu_item_data(restaurant_id, credentials, offset=0):
     """
@@ -107,8 +88,6 @@ def fetch_subset_menu_item_data(restaurant_id, credentials, offset=0):
     return r.json()
 
 
-# In[169]:
-
 def fetch_menu_item_data(restaurant_id, credentials):
     """
     Fetch data for all menu items from a specified restaurant
@@ -139,41 +118,3 @@ def fetch_menu_item_data(restaurant_id, credentials):
         menu_item_data.extend(menu_item_subset_data)
         
     return menu_item_data
-
-
-# In[149]:
-
-# Note McDonalds corresponds to 513fbc1283aa2dc80c000053
-# Chipotle corresponds to 513fbc1283aa2dc80c000002
-dat = fetch_subset_menu_item_data("513fbc1283aa2dc80c000053", credentials)
-
-
-# In[131]:
-
-print "keys:", dat.keys()
-print "length:", len(dat["hits"])
-print "total:", dat["total"]
-
-
-# In[170]:
-
-# Note McDonalds corresponds to 513fbc1283aa2dc80c000053
-# Chipotle corresponds to 513fbc1283aa2dc80c000002
-dat = fetch_menu_item_data("513fbc1283aa2dc80c000053", credentials)
-
-
-# In[171]:
-
-len(dat)
-
-
-# In[172]:
-
-with open("dump.json", "w") as f:
-    f.write(json.dumps(dat, indent=4, separators=(',', ': ')))
-
-
-# In[ ]:
-
-
-
