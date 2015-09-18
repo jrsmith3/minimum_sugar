@@ -231,7 +231,7 @@ def extract_variable(menu_data, param):
     variable : list
         Values corresponding to `param`.
     """
-    variable = [menu_item[param] for menu_item in menu_data["menu"]]
+    variable = [menu_item[param] for menu_item in menu_data]
     
     return variable
 
