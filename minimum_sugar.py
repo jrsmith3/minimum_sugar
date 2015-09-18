@@ -183,28 +183,6 @@ def fetch_menu_item_data(restaurant_id, credentials):
 
 # Functions for handling data once its downloaded
 # ===============================================
-def menu_data_keys(menu_data):
-    """
-    Helper function returning list of nutrition data keys
-    
-    Its a pain to un-nest a menu data dict to determine the exact key for the desired data.
-    This method returns the list so the user doesn't have to manually un-nest the data.
-    
-    Parameters
-    ----------
-    menu_data : dict
-        Restaurant menu data.
-
-    Returns
-    -------
-    data_keys : list
-        Keys containing menu data
-    """
-    keys = menu_data["menu"][0].keys()
-    
-    return keys
-
-
 def extract_variable(menu_data, param):
     """
     Extract variable data from menu data of specified parameter
