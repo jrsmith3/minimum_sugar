@@ -183,6 +183,37 @@ def fetch_menu_item_data(restaurant_id, credentials):
 
 # Functions for handling data once its downloaded
 # ===============================================
+def filter_menu_items(menu_data, param, value, negate=False):
+    """
+    Sublist of menu items matching target query
+
+    Parameters
+    ----------
+    menu_data : list
+        Restaurant menu data.
+    param : str
+        Parameter to extract.
+    value : str
+        Query against which parameter values will be evaluated.
+    negate : bool
+        If `False`, return all menu items matching query. 
+        If `True`, return all menu items not matching query (inverse).
+
+    Returns
+    -------
+    menu_subdata : list
+        List of items matching query.
+    """
+
+    # Probably a better way to do this.
+    if negate:
+        menu_subdata = [menu_item for menu_item in menu_data if menu_item[param] != value]
+    else:
+        menu_subdata = [menu_item for menu_item in menu_data if menu_item[param] == value]
+
+    return menu_subdata
+
+
 def extract_variable(menu_data, param):
     """
     Extract variable data from menu data of specified parameter
