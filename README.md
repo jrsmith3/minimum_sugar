@@ -21,3 +21,9 @@ I have structured the data as a python dict with the following three fields:
 * "name" : The restaurant name.
 * "id"   : The Nutritionix restaurant UID.
 * "menu" : A list of dicts containing the restaurant menu. Each dict contains all of the nutritional information and metadata for each menu item.
+
+
+Attribution
+===========
+This project fundamentally relies on data from the [Nutritionix API](http://www.nutritionix.com/api).
+I am very grateful for the use of their data.
