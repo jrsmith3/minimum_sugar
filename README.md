@@ -10,3 +10,14 @@ I am perfectly happy giving my hard earned money to a pro (including the good pe
 
 Instead of manually looking over menus and nutrition data for the places I patronize, I decided to build a tools that do the optimization for me.
 These tools are hosted in this repo.
+
+
+Restaurant menu data structure
+==============================
+This project contains functions to pull data from the Nutritionix database.
+The data is arranged according to restaurant.
+I have structured the data as a python dict with the following three fields:
+
+* "name" : The restaurant name.
+* "id"   : The Nutritionix restaurant UID.
+* "menu" : A list of dicts containing the restaurant menu. Each dict contains all of the nutritional information and metadata for each menu item.
