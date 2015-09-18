@@ -1,25 +1,13 @@
-
 # coding: utf-8
 
-# # Scratchwork to develop histogram plotting functionality
-# This ipynb is for the development of a function that takes restaurant menu data and returns a histogram.
-
-# In[1]:
-
-get_ipython().magic(u'matplotlib inline')
+"""
+Functionality to deal with menu data once its downloaded
+"""
 
 import json
 import numpy as np
 import matplotlib.pyplot as plt
 
-with open("restaurant_menu_data.json", "r") as f:
-    restaurant_menu_data = json.load(f)
-
-
-# In[58]:
-
-# Some helper functions
-# =====================
 
 def menu_data_keys(menu_data):
     """
@@ -117,8 +105,6 @@ def menu_items_min(menu_data, param):
     return menu_items
 
 
-# In[3]:
-
 def menu_histogram(menu_data, param, param_name=None):
     """
     Histogram of a specified parameter (e.g. sugar) for a given menu.
@@ -158,43 +144,3 @@ def menu_histogram(menu_data, param, param_name=None):
         plt.xlabel(param)
         
     return fig
-
-
-# ## Visualization: Histograms of menu items vs. sugar content
-
-# In[80]:
-
-param = "nf_sugars"
-
-# First, find the menu item with the maximum amount of sugar
-menu_items_max_sugar = [menu_items_max(menu_data, param) for menu_data in restaurant_menu_data]
-sugar_values = [menu_item[0][param] for menu_item in menu_items_max_sugar]
-max_sugar_value = max(sugar_values)
-
-# for menu_data in restaurant_menu_data:
-#     fig = menu_histogram(menu_data, param, "Sugar [g]")
-#     fig.axes[0].set_xlim([0, max_sugar_value])
-#     plt.show()
-
-
-# ## Visualization: Histograms of menu items vs. calories
-
-# In[81]:
-
-param = "nf_calories"
-
-# First, find the menu item with the maximum amount of calories
-menu_items_max_calories = [menu_items_max(menu_data, param) for menu_data in restaurant_menu_data]
-calories_values = [menu_item[0][param] for menu_item in menu_items_max_calories]
-max_calories_value = max(calories_values)
-
-# for menu_data in restaurant_menu_data:
-#     fig = menu_histogram(menu_data, param, "Calories")
-#     fig.axes[0].set_xlim([0, max_calories_value])
-#     plt.show()
-
-
-# In[ ]:
-
-
-
