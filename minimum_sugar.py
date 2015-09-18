@@ -236,58 +236,6 @@ def extract_variable(menu_data, param):
     return variable
 
 
-def menu_items_max(menu_data, param):
-    """
-    Subset of menu items with maximum value of specified parameter
-    
-    Parameters
-    ----------
-    menu_data : dict
-        Restaurant menu data
-    param : str
-        Parameter on which to return maximum.
-        This value should correspond to a key of the menu_data["menu"] dict who's value is numerical.
-        
-    Returns
-    -------
-    menu_items : list
-        List of menu items with maximum value of `param`.
-        Note that if only one menu item has maximum `param`, this list will be one element long.
-        On the other hand, there's no guarantee that only a single item has max `param`.
-    """
-    max_variable = max(extract_variable(menu_data, param))
-    
-    menu_items = [menu_item for menu_item in menu_data["menu"] if menu_item[param] == max_variable]
-    
-    return menu_items
-
-
-def menu_items_min(menu_data, param):
-    """
-    Subset of menu items with minimum value of specified parameter
-    
-    Parameters
-    ----------
-    menu_data : dict
-        Restaurant menu data
-    param : str
-        Parameter on which to return minimum.
-        This value should correspond to a key of the menu_data["menu"] dict who's value is numerical.
-        
-    Returns
-    -------
-    menu_items : list
-        List of menu items with minimum value of `param`.
-        Note that if only one menu item has minimum `param`, this list will be one element long.
-        On the other hand, there's no guarantee that only a single item has min `param`.
-    """
-    min_variable = min(extract_variable(menu_data, param))
-    
-    menu_items = [menu_item for menu_item in menu_data["menu"] if menu_item[param] == min_variable]
-    
-    return menu_items
-
-
 def menu_histogram(menu_data, param, param_name=None):
     """
     Histogram of a specified parameter (e.g. sugar) for a given menu.
