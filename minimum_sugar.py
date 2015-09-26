@@ -236,13 +236,13 @@ def extract_variable(menu_data, param):
     return variable
 
 
-def menu_histogram(menu_data, param, param_name=None):
+def menu_histogram(menu_data, param, title=None, param_name=None):
     """
     Histogram of a specified parameter (e.g. sugar) for a given menu.
     
     Parameters
     ----------
-    menu_data : dict
+    menu_data : list
         Restaurant menu data
     param : str
         Parameter on which to create the histogram. 
@@ -267,8 +267,11 @@ def menu_histogram(menu_data, param, param_name=None):
     
     fig = plt.figure()
     plt.bar(center, hist, align="center", width=width)
-    plt.title(menu_data["name"])
     plt.ylabel("Number of menu items")
+
+    if title:
+        plt.title(title)
+        
     if param_name:
         plt.xlabel(param_name)
     else:
