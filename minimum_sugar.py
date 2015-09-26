@@ -220,7 +220,7 @@ def extract_variable(menu_data, param):
 
     Parameters
     ----------
-    menu_data : dict
+    menu_data : list
         Restaurant menu data
     param : str
         Parameter to extract.
