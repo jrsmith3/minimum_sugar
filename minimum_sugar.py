@@ -273,7 +273,7 @@ def print_low_sugar_calorie_report(menu_data, brand_name):
         print item["item_name"] + ":", str(item["nf_calories"]) + "cal,", str(item["nf_sugars"]) + "g sugar"
 
 
-def menu_histogram(menu_data, param, title=None, param_name=None):
+def menu_histogram(menu_data, param, x_max=None, title=None, param_name=None, fig=None, **kwargs):
     """
     Histogram of a specified parameter (e.g. sugar) for a given menu.
     
@@ -297,13 +297,16 @@ def menu_histogram(menu_data, param, title=None, param_name=None):
     Histogram plotting was taken from [unutbu's solution on SO](http://stackoverflow.com/a/5328669).
     """
     variable = extract_variable(menu_data, param)
-    
-    hist, bins = np.histogram(variable, bins=20)
-    center = (bins[:-1] + bins[1:]) / 2
-    width = 0.7 * (bins[1] - bins[0])
-    
-    fig = plt.figure()
-    plt.bar(center, hist, align="center", width=width)
+
+    if not x_max:
+        x_max = max(variable)
+
+    bins = np.linspace(0, x_max, 20)
+
+    if not fig:
+        fig = plt.figure()
+
+    plt.hist(variable, bins, **kwargs)
     plt.ylabel("Number of menu items")
 
     if title:
