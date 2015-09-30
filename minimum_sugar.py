@@ -252,6 +252,31 @@ def print_max_sugar_menu_item(menu_data, brand_name):
         print "Iten name:", menu_item["item_name"]
 
 
+def print_low_sugar_calorie_report(menu_data, brand_name):
+    """
+    Print report on low sugar items
+    """
+    entree_items = filter_menu_items(menu_data, "menu_category", "entree")
+    restaurant_entree_items = filter_menu_items(entree_items, "brand_name", brand_name)
+    low_sugar_menu_items = [menu_item for menu_item in restaurant_entree_items if menu_item["nf_sugars"] < 3]
+    calories = list(set(extract_variable(low_sugar_menu_items, "nf_calories")))
+    calories.sort(reverse=True)
+
+    items = []
+
+    for calorie in calories:
+        items.extend(filter_menu_items(low_sugar_menu_items, "nf_calories", calorie))
+
+    print brand_name
+    print "=" * len(brand_name)
+    for item in items:
+        print item["item_name"] + ":", str(item["nf_calories"]) + "cal,", str(item["nf_sugars"]) + "g sugar"
+
+
+
+
+
+
 def menu_histogram(menu_data, param, title=None, param_name=None):
     """
     Histogram of a specified parameter (e.g. sugar) for a given menu.
