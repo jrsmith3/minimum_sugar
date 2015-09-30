@@ -273,10 +273,6 @@ def print_low_sugar_calorie_report(menu_data, brand_name):
         print item["item_name"] + ":", str(item["nf_calories"]) + "cal,", str(item["nf_sugars"]) + "g sugar"
 
 
-
-
-
-
 def menu_histogram(menu_data, param, title=None, param_name=None):
     """
     Histogram of a specified parameter (e.g. sugar) for a given menu.
