@@ -236,6 +236,22 @@ def extract_variable(menu_data, param):
     return variable
 
 
+# Functions for visualization and reporting
+# =========================================
+def print_max_sugar_menu_item(menu_data, brand_name):
+    """
+    Print sugar content and menu item name containing max sugar
+    """
+    restaurant_menu_items = filter_menu_items(menu_data, "brand_name", brand_name)
+    restaurant_entree_items = filter_menu_items(restaurant_menu_items, "menu_category", "entree")
+    max_sugar = max(extract_variable(restaurant_entree_items, "nf_sugars"))
+
+    print "Max sugar:", max_sugar
+    menu_items = filter_menu_items(restaurant_entree_items, "nf_sugars", max_sugar)
+    for menu_item in menu_items:
+        print "Iten name:", menu_item["item_name"]
+
+
 def menu_histogram(menu_data, param, title=None, param_name=None):
     """
     Histogram of a specified parameter (e.g. sugar) for a given menu.
