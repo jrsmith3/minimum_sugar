@@ -1,6 +1,9 @@
 # Nutritionix API key
 credentials.json
 
+# Menu database
+menu_data.sqlite3
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
