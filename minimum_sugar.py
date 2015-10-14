@@ -273,31 +273,30 @@ def print_low_sugar_calorie_report(menu_data, brand_name):
         print item["item_name"] + ":", str(item["nf_calories"]) + "cal,", str(item["nf_sugars"]) + "g sugar"
 
 
-def menu_histogram(menu_data, param, x_max=None, title=None, param_name=None, fig=None, **kwargs):
+def menu_histogram(data, x_max=None, param_name=None, title=None, fig=None, **kwargs):
     """
-    Histogram of a specified parameter (e.g. sugar) for a given menu.
+    Formatted histogram of univariate data
     
     Parameters
     ----------
-    menu_data : list
-        Restaurant menu data
-    param : str
-        Parameter on which to create the histogram. 
-        This value should correspond to a key of the menu_data["menu"] dict who's value is numerical.
-    param_name : str, optional
-        Human-readable name describing `param`.
-        
+    data : list of 2-tuples
+        Formatted as returned by sqlite3's SELECT statement.
+    x_max : float
+        Extremum of horizontal axis.
+    param_name : str
+        Name of parameter to print on vertical axis.
+    title : str
+        Title to print on axis
+    fig : matplotlib.figure.Figure
+        Figure on which to plot histogram.
+
     Returns
     -------
     fig : matplotlib.figure.Figure
         Figure displaying histogram data
-        
-    Notes
-    -----
-    Histogram plotting was taken from [unutbu's solution on SO](http://stackoverflow.com/a/5328669).
     """
-    variable = extract_variable(menu_data, param)
-
+    variable = [dat[0] for dat in data]
+    
     if not x_max:
         x_max = max(variable)
 
@@ -314,7 +313,5 @@ def menu_histogram(menu_data, param, x_max=None, title=None, param_name=None, fi
         
     if param_name:
         plt.xlabel(param_name)
-    else:
-        plt.xlabel(param)
         
     return fig
