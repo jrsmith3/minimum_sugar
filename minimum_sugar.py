@@ -3,6 +3,7 @@
 import requests
 import json
 import os
+import sqlite3
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -238,18 +239,56 @@ def extract_variable(menu_data, param):
 
 # Functions for visualization and reporting
 # =========================================
-def print_max_sugar_menu_item(menu_data, brand_name):
-    """
-    Print sugar content and menu item name containing max sugar
-    """
-    restaurant_menu_items = filter_menu_items(menu_data, "brand_name", brand_name)
-    restaurant_entree_items = filter_menu_items(restaurant_menu_items, "menu_category", "entree")
-    max_sugar = max(extract_variable(restaurant_entree_items, "nf_sugars"))
 
-    print "Max sugar:", max_sugar
-    menu_items = filter_menu_items(restaurant_entree_items, "nf_sugars", max_sugar)
-    for menu_item in menu_items:
-        print "Iten name:", menu_item["item_name"]
+
+# def print_max_sugar_menu_item(menu_data, brand_name):
+#     """
+#     Print sugar content and menu item name containing max sugar
+#     """
+#     restaurant_menu_items = filter_menu_items(menu_data, "brand_name", brand_name)
+#     restaurant_entree_items = filter_menu_items(restaurant_menu_items, "menu_category", "entree")
+#     max_sugar = max(extract_variable(restaurant_entree_items, "nf_sugars"))
+
+#     print "Max sugar:", max_sugar
+#     menu_items = filter_menu_items(restaurant_entree_items, "nf_sugars", max_sugar)
+#     for menu_item in menu_items:
+#         print "Iten name:", menu_item["item_name"]
+
+
+
+def print_max_sugar_menu_item(database_filename, brand_name):
+    """
+    Print sugar content and entree menu item name containing max sugar
+
+    Parameters
+    ----------
+    database_filename : str
+        Path to database containing `menu_data` table.
+    brand_name : str
+        Name of restaurant
+
+    Returns
+    -------
+    Nothing, but prints info.
+    """
+    with sqlite3.connect(database_filename) as conn:
+        select_stmt = """
+            SELECT nf_sugars, item_name
+                FROM menu_data 
+                WHERE brand_name = ?1
+                AND menu_category = 'entree'
+                AND nf_sugars = (SELECT MAX(nf_sugars) FROM menu_data WHERE brand_name = ?1 AND menu_category = 'entree')
+            """
+
+        cursor = conn.cursor()
+        cursor.execute(select_stmt, (brand_name, ))
+        return_txts = cursor.fetchall()
+
+        for return_txt in return_txts:
+            print "Max sugar:", return_txt[0]
+            print "Item Name:", return_txt[1]
+
+
 
 
 def print_low_sugar_calorie_report(menu_data, brand_name):
@@ -292,7 +331,7 @@ def menu_histogram(data, x_max=None, param_name=None, title=None, fig=None, **kw
 
     Returns
     -------
-    fig : matplotlib.figure.Figure
+    fig : matplotlmib.figure.Figure
         Figure displaying histogram data
     """
     variable = [dat[0] for dat in data]
